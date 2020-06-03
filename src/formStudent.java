@@ -296,6 +296,23 @@ public class formStudent extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int id = tStudent.getSelectedRow();
+        String data=tStudent.getModel().getValueAt(id, 0).toString();
+        if(Connect.open()){
+                try {
+                    //Mấy dấu ? đại diện cho 1 bột
+                    ps = Connect.cnn.prepareStatement("DELETE FROM students WHERE student_id=?");
+                    ps.setString(1, data);                    
+                    //excuteUpdate xài cho delete
+                    ps.executeUpdate();    
+                    //cập nhật lại db
+                    showData();
+                    Connect.close(ps);                   
+                } catch (SQLException ex) {
+                    System.out.println("Error");
+                }
+            }
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -376,21 +393,22 @@ public class formStudent extends javax.swing.JFrame {
                     ps.setString(2, txtFN.getText());
                     ps.setString(3, txtLN.getText());
                     //ép kiểu dtBD nhưng đang lỗi và giờ đã hết lỗi haha
-                    //------------------
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     String dl = format.format(new Date());
                     ps.setString(4, dl);
-                    //-----------------
+                    //ép kiểu combobox
                     String gd = String.valueOf(cbGD.getSelectedItem());
                     ps.setString(5, gd);
                     ps.setString(6, txtAD.getText());
                     String cn = String.valueOf(cbCN.getSelectedItem());
                     ps.setString(7, cn);
-                    ps.executeUpdate();                    
-                    JOptionPane.showMessageDialog(this, "add success");
+                    //excuteUpdate xài cho insert
+                    ps.executeUpdate();    
+                    //cập nhật lại db
+                    showData();
                     Connect.close(ps);                   
                 } catch (SQLException ex) {
-                    Logger.getLogger(formStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Error");
                 }
             }
         }
