@@ -51,6 +51,7 @@ public class formLogin extends javax.swing.JFrame {
                 ps = Connect.cnn.prepareStatement("Select usernames, passwords from accounts");
                 //rs là biến ResultSet gọi executeQuery
                 rs = ps.executeQuery();
+                System.out.println(""+rs);
                 //Con trỏ rs đứng ở dòng đầu tiên tiến hành chạy đến dòng kế tiếp
                 while (rs.next())
                 {
