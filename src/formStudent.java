@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -320,9 +321,43 @@ public class formStudent extends javax.swing.JFrame {
         return true;
     }
     
+    //combobox
+    private void showDataCB(){
+        try {
+            //clear bảng
+ 
+            //Đặt tên cho mấy cái cột trong bảng
+            //Mô hình bảng của JLabel truy xuất = vector
+            DefaultComboBoxModel model = new DefaultComboBoxModel();  
+            //Lấy data của sinh viên khi connect mở <hàm connect viết bên kia>
+            if(Connect.open()){
+                ps = Connect.cnn.prepareStatement("Select class_name from classes");
+            
+            rs = ps.executeQuery();
+                while (rs.next()) {
+                    //Biến vector hoạt động khá giống 1 biến mảng
+                    Vector vector = new Vector();
+                    vector.add(rs.getString("class_name"));
+                    
+                    //Chạy hàm addRow
+                    model.addElement(vector);
+                }
+            }
+            //đóng kết nối
+            Connect.close(ps, rs);
+            //Gắn vô bảng
+            cbCN.setModel(model);
+        } catch (SQLException ex) {
+            System.out.println("Not connect");
+        }
+    }
+
+    
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
         showData();
+        showDataCB();
     }//GEN-LAST:event_formComponentShown
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -385,7 +420,7 @@ public class formStudent extends javax.swing.JFrame {
             return;
         }
         String id= txtID.getText();
-        if(id.length()!=10){
+        if(id.length()>10){
             JOptionPane.showMessageDialog(this, "ID must 10 character");
             txtID.requestFocus();
             return;
@@ -431,10 +466,8 @@ public class formStudent extends javax.swing.JFrame {
                     String gd = String.valueOf(cbGD.getSelectedItem());
                     ps.setString(5, gd);
                     ps.setString(6, txtAD.getText());
-                              
-                    //String cn = String.valueOf(cbCN.getSelectedItem());
-                    //ps.setString(7, cn);
-                    
+                    String cn = String.valueOf(cbCN.getSelectedItem());
+                    ps.setString(7, cn);
                     //excuteUpdate xài cho insert
                     ps.executeUpdate();  
                     //cập nhật lại db
