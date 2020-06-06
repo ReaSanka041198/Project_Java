@@ -195,10 +195,6 @@ public class formStudent extends javax.swing.JFrame {
                         .addGap(187, 187, 187)
                         .addComponent(btnDelete)))
                 .addContainerGap(224, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(257, 257, 257))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -212,6 +208,10 @@ public class formStudent extends javax.swing.JFrame {
                         .addGap(326, 326, 326)
                         .addComponent(jLabel7)))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(259, 259, 259))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,9 +250,9 @@ public class formStudent extends javax.swing.JFrame {
                     .addComponent(btnEdit)
                     .addComponent(btnDelete)
                     .addComponent(btnAdd))
-                .addGap(63, 63, 63)
+                .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(71, 71, 71))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -321,69 +321,7 @@ public class formStudent extends javax.swing.JFrame {
         return true;
     }
     
-    //combobox
-    private void showDataCB(){
-        try {
-            //clear bảng
- 
-            //Đặt tên cho mấy cái cột trong bảng
-            //Mô hình bảng của JLabel truy xuất = vector
-            DefaultComboBoxModel model = new DefaultComboBoxModel();  
-            //Lấy data của sinh viên khi connect mở <hàm connect viết bên kia>
-            if(Connect.open()){
-                ps = Connect.cnn.prepareStatement("Select class_name from classes");
-            
-            rs = ps.executeQuery();
-                while (rs.next()) {
-                    //Biến vector hoạt động khá giống 1 biến mảng
-                    Vector vector = new Vector();
-                    vector.add(rs.getString("class_name"));
-                    
-                    //Chạy hàm addRow
-                    model.addElement(vector);
-                }
-            }
-            //đóng kết nối
-            Connect.close(ps, rs);
-            //Gắn vô bảng
-            cbCN.setModel(model);
-        } catch (SQLException ex) {
-            System.out.println("Not connect");
-        }
-    }
-
-    
-    
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // TODO add your handling code here:
-        showData();
-        showDataCB();
-    }//GEN-LAST:event_formComponentShown
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        int id = tStudent.getSelectedRow();
-        String data=tStudent.getModel().getValueAt(id, 0).toString();
-        if(Connect.open()){
-                try {
-                    //Mấy dấu ? đại diện cho 1 bột
-                    ps = Connect.cnn.prepareStatement("DELETE FROM students WHERE student_id=?");
-                    ps.setString(1, data);                    
-                    //excuteUpdate xài cho delete
-                    ps.executeUpdate();    
-                    //cập nhật lại db
-                    showData();
-                    Connect.close(ps);                   
-                } catch (SQLException ex) {
-                    System.out.println("Error");
-                }
-            }
-        
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        //Mấy hàm check data nhập vào có đúng định dạng k
+    public void check_input(){
         if(txtID.getText().equals("")){
             JOptionPane.showMessageDialog(this, "please import studentID");
             txtID.requestFocus();
@@ -446,6 +384,54 @@ public class formStudent extends javax.swing.JFrame {
             txtAD.requestFocus();
             return;
         }
+    }
+    
+    public void showCB(){
+        if(Connect.open()){
+            try {
+                ps = Connect.cnn.prepareStatement("Select classes.class_name from classes");
+                rs = ps.executeQuery();
+                while (rs.next()) {                    
+                    cbCN.addItem(rs.getString(1));
+                }
+ 
+            } catch (SQLException ex) {
+                System.out.println("Error Query");;
+            }
+        }
+    }
+    
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        showData();
+        showCB();
+    }//GEN-LAST:event_formComponentShown
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int id = tStudent.getSelectedRow();
+        String data=tStudent.getModel().getValueAt(id, 0).toString();
+        if(Connect.open()){
+                try {
+                    //Mấy dấu ? đại diện cho 1 bột
+                    ps = Connect.cnn.prepareStatement("DELETE FROM students WHERE student_id=?");
+                    ps.setString(1, data);                    
+                    //excuteUpdate xài cho delete
+                    ps.executeUpdate();    
+                    //cập nhật lại db
+                    showData();
+                    Connect.close(ps);                   
+                } catch (SQLException ex) {
+                    System.out.println("Error");
+                }
+            }
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        //Mấy hàm check data nhập vào có đúng định dạng k
+        check_input();
         if(check_id()==false){
             JOptionPane.showMessageDialog(this, "student id exist");
             txtID.requestFocus();
