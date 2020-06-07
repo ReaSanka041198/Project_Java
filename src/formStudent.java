@@ -102,6 +102,11 @@ public class formStudent extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tStudentMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tStudent);
 
         btnAdd.setText("Add");
@@ -508,6 +513,12 @@ public class formStudent extends javax.swing.JFrame {
                 }
             }
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void tStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tStudentMouseClicked
+        // TODO add your handling code here:
+        int id=tStudent.getSelectedRow();
+        txtID.setText((String)(tStudent.getValueAt(id,0)));
+    }//GEN-LAST:event_tStudentMouseClicked
 
     /**
      * @param args the command line arguments
