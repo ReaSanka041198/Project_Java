@@ -215,21 +215,21 @@ public class formLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //event đang nhập
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         login();   
     }//GEN-LAST:event_btnLoginActionPerformed
-
+    //event xóa 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         txtUser.setText("");
         txtPass.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
-
+    //event thoát
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    //void keyReleased(KeyEvent e): Được thực thi khi một key đã được nhả ra. Tức là ấn vô buông ra xong nó chạy
+    //void keyReleased(KeyEvent e): Được thực thi khi một key đã được nhả ra. nó để ấn enter thay vì rê con chuột
     private void txtUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyReleased
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)

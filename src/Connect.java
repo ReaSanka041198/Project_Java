@@ -52,48 +52,22 @@ public class Connect {
         return false;
     }
     //Hàm đóng kết nối database
-    public static void close()
+    public static void close(PreparedStatement ps, ResultSet rs)
     {
         try
         {
             //Mấy cái chữ xanh lá chuối đã được khai báo ở trên
             if (cnn != null)
                 cnn.close();
+            if (ps != null)
+                ps.close();
+            if (rs !=null)
+                rs.close();
         } 
         catch (SQLException ex)
         {
             Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }       
     }
-    //Hàm đóng kết nối database, sẵn tiện tắt luôn PreparedStatement(Nó được sử dụng để thực hiện truy vấn tham số.)
-    public static void close(PreparedStatement ps)
-    {
-        try
-        {
-            if (ps != null)
-                ps.close();
-        }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        close();
-    }
-    //Tương tự ở trên(Đối tượng của ResultSet duy trì một con trỏ trỏ đến một hàng của một bảng. Ban đầu, con trỏ trỏ đến hàng đầu tiên.)
-    public static void close(PreparedStatement ps, ResultSet rs)
-    {
-        try
-        {
-            if (rs !=null)
-                rs.close();
-        }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        close(ps);
-    }
-    public static void main(String[] args) {
-        Connect.open();
-    }
+    
 }

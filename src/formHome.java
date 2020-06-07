@@ -423,6 +423,7 @@ public class formHome extends javax.swing.JFrame {
 
     private void btnSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSinhVienActionPerformed
         // TODO add your handling code here:
+        //Click nút đi tới formStudent
         formStudent fS=new formStudent();
         fS.setVisible(true);
         fS.setLocationRelativeTo(null);
