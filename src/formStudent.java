@@ -112,6 +112,11 @@ public class formStudent extends javax.swing.JFrame {
         });
 
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -401,6 +406,12 @@ public class formStudent extends javax.swing.JFrame {
         }
     }
     
+    private void tStudent(java.awt.event.MouseEvent evt){
+        DefaultTableModel model = null;
+        int id = tStudent.getSelectedRow();
+        txtID.setText((String)(model.getValueAt(id, 0)));
+    }
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
         showData();
@@ -465,6 +476,38 @@ public class formStudent extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        int id = tStudent.getSelectedRow();
+        String data=tStudent.getModel().getValueAt(id, 0).toString();
+        if(Connect.open()){
+                try {
+                    //Mấy dấu ? đại diện cho 1 bột
+                    ps = Connect.cnn.prepareStatement("UPDATE students SET first_name=?, last_name=?, birthday=?, gender=?, address=?, class_name=? WHERE student_id="+data);                   
+                    //ps.setString(1, txtID.getText());
+                    ps.setString(1, txtFN.getText());
+                    ps.setString(2, txtLN.getText());
+                    //ép kiểu dtBD nhưng đang lỗi và giờ đã hết lỗi haha
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    String dl = format.format(new Date());
+                    ps.setString(3, dl);
+                    //ép kiểu combobox
+                    String gd = String.valueOf(cbGD.getSelectedItem());
+                    ps.setString(4, gd);
+                    ps.setString(5, txtAD.getText());
+                    String cn = String.valueOf(cbCN.getSelectedItem());
+                    ps.setString(6, cn);
+                    //excuteUpdate xài cho insert
+                    ps.executeUpdate();  
+                    //cập nhật lại db
+                    showData();
+                    Connect.close(ps);                   
+                } catch (SQLException ex) {
+                    System.out.println("Error--");
+                }
+            }
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
