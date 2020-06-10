@@ -106,6 +106,7 @@ public class formLogin extends javax.swing.JFrame {
         lbLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 153, 255));
 
         lbImage1.setForeground(new java.awt.Color(255, 255, 255));
         lbImage1.setIcon(new javax.swing.ImageIcon("D:\\Image\\iLogin.png")); // NOI18N
