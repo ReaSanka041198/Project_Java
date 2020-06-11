@@ -153,7 +153,7 @@ public class formHome extends javax.swing.JFrame {
 
         btnTinhDiemTB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnTinhDiemTB.setForeground(new java.awt.Color(255, 0, 153));
-        btnTinhDiemTB.setText("Tính điểm trung bình");
+        btnTinhDiemTB.setText("Meduim score");
         btnTinhDiemTB.setDefaultCapable(false);
         btnTinhDiemTB.setHideActionText(true);
         btnTinhDiemTB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -164,7 +164,7 @@ public class formHome extends javax.swing.JFrame {
 
         btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnTimKiem.setForeground(new java.awt.Color(255, 0, 153));
-        btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.setText("Search");
         btnTimKiem.setDefaultCapable(false);
         btnTimKiem.setHideActionText(true);
         btnTimKiem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -361,7 +361,6 @@ public class formHome extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 255, 51));
-        jLabel2.setText("User:");
 
         lblUser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUser.setForeground(new java.awt.Color(255, 0, 0));
@@ -375,8 +374,8 @@ public class formHome extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
         jPanel3Layout.setVerticalGroup(

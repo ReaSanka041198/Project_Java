@@ -521,6 +521,7 @@ public class formStudent extends javax.swing.JFrame {
                     ps.executeUpdate();  
                     //cập nhật lại db
                     showData();
+                    
                     Connect.close(ps, rs);                   
                 } catch (SQLException ex) {
                     System.out.println("Error--");
@@ -533,6 +534,7 @@ public class formStudent extends javax.swing.JFrame {
         
         int id=tStudent.getSelectedRow();
         txtID.setText((String)(tStudent.getValueAt(id,0)));
+        txtID.enable(false);
     }//GEN-LAST:event_tStudentMouseClicked
     //Hàm quay lại home
     private void txtBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBackActionPerformed
@@ -549,6 +551,7 @@ public class formStudent extends javax.swing.JFrame {
         txtFN.setText("");
         txtLN.setText("");
         txtAD.setText("");
+        txtID.enable(true);
     }//GEN-LAST:event_btnClearActionPerformed
 
     /**

@@ -294,7 +294,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="0" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="T&#xed;nh &#x111;i&#x1ec3;m trung b&#xec;nh"/>
+            <Property name="text" type="java.lang.String" value="Meduim score"/>
             <Property name="defaultCapable" type="boolean" value="false"/>
             <Property name="hideActionText" type="boolean" value="true"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
@@ -319,7 +319,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="0" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
+            <Property name="text" type="java.lang.String" value="Search"/>
             <Property name="defaultCapable" type="boolean" value="false"/>
             <Property name="hideActionText" type="boolean" value="true"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
@@ -648,8 +648,8 @@
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="59" max="32767" attributes="0"/>
-                  <Component id="lblUser" pref="54" max="32767" attributes="0"/>
+                  <EmptySpace pref="74" max="32767" attributes="0"/>
+                  <Component id="lblUser" pref="69" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -677,7 +677,6 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="ff" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="User:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
