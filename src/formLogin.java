@@ -125,6 +125,11 @@ public class formLogin extends javax.swing.JFrame {
         lbPassword.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lbPassword.setText("Password:");
 
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtUserKeyReleased(evt);
@@ -267,6 +272,10 @@ public class formLogin extends javax.swing.JFrame {
             login();
         }
     }//GEN-LAST:event_txtPassKeyReleased
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
     
     /**
      * @param args the command line arguments

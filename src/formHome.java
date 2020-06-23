@@ -117,6 +117,11 @@ public class formHome extends javax.swing.JFrame {
         btnGiangVien.setMargin(new java.awt.Insets(1, 14, 2, 14));
         btnGiangVien.setPreferredSize(new java.awt.Dimension(151, 33));
         btnGiangVien.setSelected(true);
+        btnGiangVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGiangVienActionPerformed(evt);
+            }
+        });
 
         btnBangDiem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnBangDiem.setForeground(new java.awt.Color(255, 0, 153));
@@ -128,6 +133,11 @@ public class formHome extends javax.swing.JFrame {
         btnBangDiem.setMargin(new java.awt.Insets(1, 14, 2, 14));
         btnBangDiem.setPreferredSize(new java.awt.Dimension(151, 33));
         btnBangDiem.setSelected(true);
+        btnBangDiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBangDiemActionPerformed(evt);
+            }
+        });
 
         btnLop.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnLop.setForeground(new java.awt.Color(255, 0, 153));
@@ -139,6 +149,11 @@ public class formHome extends javax.swing.JFrame {
         btnLop.setMargin(new java.awt.Insets(1, 14, 2, 14));
         btnLop.setPreferredSize(new java.awt.Dimension(151, 33));
         btnLop.setSelected(true);
+        btnLop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLopActionPerformed(evt);
+            }
+        });
 
         btnMonHoc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnMonHoc.setForeground(new java.awt.Color(255, 0, 153));
@@ -150,6 +165,11 @@ public class formHome extends javax.swing.JFrame {
         btnMonHoc.setMargin(new java.awt.Insets(1, 14, 2, 14));
         btnMonHoc.setPreferredSize(new java.awt.Dimension(151, 33));
         btnMonHoc.setSelected(true);
+        btnMonHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonHocActionPerformed(evt);
+            }
+        });
 
         btnTinhDiemTB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnTinhDiemTB.setForeground(new java.awt.Color(255, 0, 153));
@@ -428,6 +448,26 @@ public class formHome extends javax.swing.JFrame {
         fS.setLocationRelativeTo(null);
         dispose();
     }//GEN-LAST:event_btnSinhVienActionPerformed
+
+    private void btnLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLopActionPerformed
+        // TODO add your handling code here:
+        formClass fC=new formClass();
+        fC.setVisible(true);
+        fC.setLocationRelativeTo(null);
+        dispose();
+    }//GEN-LAST:event_btnLopActionPerformed
+
+    private void btnMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonHocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMonHocActionPerformed
+
+    private void btnGiangVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiangVienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGiangVienActionPerformed
+
+    private void btnBangDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangDiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBangDiemActionPerformed
 
     /**
      * @param args the command line arguments

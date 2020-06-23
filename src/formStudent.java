@@ -101,7 +101,7 @@ public class formStudent extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -410,6 +410,12 @@ public class formStudent extends javax.swing.JFrame {
             txtAD.requestFocus();
             return;
         }
+        
+        try {// if is number
+            Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "ID must be a number");
+        }
     }
     //Hàm lấy data cái combo box class name
     public void showCB(){
@@ -428,8 +434,7 @@ public class formStudent extends javax.swing.JFrame {
     }
     //Hiển thị mấy cái phần tử của form như cái table
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:        
         showData();
         showCB();
     }//GEN-LAST:event_formComponentShown
@@ -487,9 +492,10 @@ public class formStudent extends javax.swing.JFrame {
                     ps.executeUpdate();  
                     //cập nhật lại db
                     showData();
+                    JOptionPane.showMessageDialog(this, "Add success");
                     Connect.close(ps, rs);                   
                 } catch (SQLException ex) {
-                    System.out.println("Error");
+                    System.out.println("Add faild, please check again");
                 }
             }
         }
