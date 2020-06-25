@@ -459,6 +459,10 @@ public class formHome extends javax.swing.JFrame {
 
     private void btnMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonHocActionPerformed
         // TODO add your handling code here:
+        formSubject fSub = new formSubject();
+        fSub.setVisible(true);
+        fSub.setLocationRelativeTo(null);
+        dispose();
     }//GEN-LAST:event_btnMonHocActionPerformed
 
     private void btnGiangVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiangVienActionPerformed
@@ -467,6 +471,10 @@ public class formHome extends javax.swing.JFrame {
 
     private void btnBangDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangDiemActionPerformed
         // TODO add your handling code here:
+        formMark fM = new formMark();
+        fM.setVisible(true);
+        fM.setLocationRelativeTo(null);
+        dispose();
     }//GEN-LAST:event_btnBangDiemActionPerformed
 
     /**

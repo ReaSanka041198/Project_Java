@@ -276,7 +276,6 @@ public class formClass extends javax.swing.JFrame {
 
     private void btnComebackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComebackActionPerformed
         // TODO add your handling code here:
-        // TODO add your handling code here:
         formHome fH=new formHome();
         fH.setVisible(true);
         fH.setLocationRelativeTo(null);
