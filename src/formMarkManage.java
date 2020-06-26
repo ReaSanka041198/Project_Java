@@ -98,6 +98,26 @@ public class formMarkManage extends javax.swing.JFrame {
         }
         return true;
     }
+    
+    public boolean check_subject(int subject_id) {
+        boolean haveSubject = true;
+        if (Connect.open()) {
+            try {
+                int maSV = Integer.parseInt(formMark.txtIDS.getText());
+                ps = Connect.cnn.prepareStatement("SELECT subject_id FROM subjects WHERE subject_id IN (SELECT subject_id FROM mark WHERE student_id=" + formMark.txtIDS.getText() + ")");
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (rs.getInt("subject_id") == subject_id) {
+                        haveSubject = false;
+                        return haveSubject;
+                    }
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }
+        return haveSubject;
+    }
 
     public boolean check_input() {
         if (txtMark1.getText().equals("")) {
@@ -455,27 +475,31 @@ public class formMarkManage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        check_input(); 
-        if(check_input()==false){
-            return;
-        }else
-        try {
-            
-            int subject_id = cbbSubject.getSelectedIndex() + 1;
-            float mark1 = Float.parseFloat(txtMark1.getText());
-            float mark2 = Float.parseFloat(txtMark2.getText());
-            float mark3 = Float.parseFloat(txtMark3.getText());
-            float medium_mark = (Float.parseFloat(txtMark1.getText()) + Float.parseFloat(txtMark1.getText()) + Float.parseFloat(txtMark1.getText())) / 3;
+        if (check_input() == true) {
+            try {
 
-            Connect.open();
-            ps = Connect.cnn.prepareStatement("INSERT INTO mark VALUES (" + subject_id + "," + formMark.txtIDS.getText() + "," + mark1 + "," + mark2 + "," + mark3 + "," + medium_mark + ")");
-            ps.executeUpdate();
-            Connect.close(ps, rs);
-            showData();
-        } catch (SQLException ex) {
-            System.out.println("Error add mark");
+                int subject_id = cbbSubject.getSelectedIndex() + 1;
+                if (check_subject(subject_id) == false) {
+                    JOptionPane.showMessageDialog(this, "Mark exist");
+                } else {
+                    float mark1 = Float.parseFloat(txtMark1.getText());
+                    float mark2 = Float.parseFloat(txtMark2.getText());
+                    float mark3 = Float.parseFloat(txtMark3.getText());
+                    float medium_mark = (Float.parseFloat(txtMark1.getText()) + Float.parseFloat(txtMark1.getText()) + Float.parseFloat(txtMark1.getText())) / 3;
+                    if (check_subject(subject_id) == false) {
+                        JOptionPane.showMessageDialog(this, "Subject exist");
+                    } else {
+                        Connect.open();
+                        ps = Connect.cnn.prepareStatement("INSERT INTO mark VALUES (" + subject_id + "," + formMark.txtIDS.getText() + "," + mark1 + "," + mark2 + "," + mark3 + "," + medium_mark + ")");
+                        ps.executeUpdate();
+                        Connect.close(ps, rs);
+                        showData();
+                    }
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
         }
-        
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void NapItemDuocChon() {
