@@ -306,7 +306,7 @@ public class formStudent extends javax.swing.JFrame {
             //Lấy data của sinh viên khi connect mở <hàm connect viết bên kia>
             if(Connect.open()){
                 ps = Connect.cnn.prepareStatement("Select * from students");            
-            rs = ps.executeQuery();
+                rs = ps.executeQuery();
                 while (rs.next()) {
                     //Biến vector hoạt động khá giống 1 biến mảng
                     Vector vector = new Vector();

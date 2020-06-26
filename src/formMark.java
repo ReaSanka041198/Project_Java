@@ -29,7 +29,7 @@ public class formMark extends javax.swing.JFrame {
     public formMark() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -295,6 +295,6 @@ public class formMark extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable tMark;
-    private javax.swing.JTextField txtIDS;
+    public static javax.swing.JTextField txtIDS;
     // End of variables declaration//GEN-END:variables
 }
