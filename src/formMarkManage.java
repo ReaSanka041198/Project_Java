@@ -99,32 +99,33 @@ public class formMarkManage extends javax.swing.JFrame {
         return true;
     }
 
-    public void check_input() {
+    public boolean check_input() {
         if (txtMark1.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mark 1 must enter");
             txtMark1.requestFocus();
-            return;            
-        } else if (Integer.parseInt(txtMark1.getText()) > 10 || Integer.parseInt(txtMark1.getText()) < 0) {
+            return false;
+        } else if (Float.parseFloat(txtMark1.getText()) > 10 || Float.parseFloat(txtMark1.getText()) < 0) {
             JOptionPane.showMessageDialog(this, "Mark 1 must between 0 and 10");
             txtMark1.requestFocus();
-            return;
+            return false;
         } else if (txtMark2.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mark 2 must enter");
             txtMark2.requestFocus();
-            return;
-        } else if (Integer.parseInt(txtMark2.getText()) > 10 || Integer.parseInt(txtMark2.getText()) < 0) {
+            return false;
+        } else if (Float.parseFloat(txtMark2.getText()) > 10 || Float.parseFloat(txtMark2.getText()) < 0) {
             JOptionPane.showMessageDialog(this, "Mark 2 must between 0 and 10");
             txtMark1.requestFocus();
-            return;
+            return false;
         } else if (txtMark3.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mark 3 must enter");
             txtMark3.requestFocus();
-            return;
-        } else if (Integer.parseInt(txtMark3.getText()) > 10 || Integer.parseInt(txtMark3.getText()) < 0) {
+            return false;
+        } else if (Float.parseFloat(txtMark3.getText()) > 10 || Float.parseFloat(txtMark3.getText()) < 0) {
             JOptionPane.showMessageDialog(this, "Mark 3 must between 0 and 10");
             txtMark1.requestFocus();
-            return;
+            return false;
         }
+        return true;
     }
 
     public void clear_input() {
@@ -417,11 +418,14 @@ public class formMarkManage extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMark3KeyTyped
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        check_input(); 
         if (tMark.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(this, "Phải chọn một dòng để xóa!");
             return;
-        }
-        if (Connect.open()) {
+        }        
+        if(check_input()==false){
+            return;
+        }else if (Connect.open()) {
             try {
                 int row = tMark.getSelectedRow();
                 int maSV_to_up = Integer.parseInt(formMark.txtIDS.getText());
@@ -452,6 +456,9 @@ public class formMarkManage extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         check_input(); 
+        if(check_input()==false){
+            return;
+        }else
         try {
             
             int subject_id = cbbSubject.getSelectedIndex() + 1;
