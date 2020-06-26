@@ -3,6 +3,7 @@ import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -42,6 +43,7 @@ public class formMarkManage extends javax.swing.JFrame {
             //Lấy data của sinh viên khi connect mở <hàm connect viết bên kia>
             if (Connect.open()) {
                 int IDStudent = Integer.parseInt(formMark.txtIDS.getText());
+                txtID.setText(""+IDStudent);
                 ps = Connect.cnn.prepareStatement("Select subjects.subject_name, mark1, mark2, mark3 from mark,subjects where subjects.subject_id=mark.subject_id AND student_id=" + IDStudent + "");
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -84,14 +86,14 @@ public class formMarkManage extends javax.swing.JFrame {
     private boolean check_id() {
         if (Connect.open()) {
             try {
-
-                ps = Connect.cnn.prepareStatement("Select * from subjects, mark where subjects.subject_id = mark.subject_id and mark.student_id=" + formMark.txtIDS.getText() + " ");
+                String cbb = String.valueOf(cbbSubject.getSelectedItem());
+                ps = Connect.cnn.prepareStatement("Select subject_name from subjects,mark where subjects.subject_id=mark.subject_id AND subjects.subject_name="+cbb);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     return false;
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, ex);
+                System.out.println("Loi cau query");
             }
         }
         return true;
@@ -101,7 +103,7 @@ public class formMarkManage extends javax.swing.JFrame {
         if (txtMark1.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mark 1 must enter");
             txtMark1.requestFocus();
-            return;
+            return;            
         } else if (Integer.parseInt(txtMark1.getText()) > 10 || Integer.parseInt(txtMark1.getText()) < 0) {
             JOptionPane.showMessageDialog(this, "Mark 1 must between 0 and 10");
             txtMark1.requestFocus();
@@ -138,6 +140,8 @@ public class formMarkManage extends javax.swing.JFrame {
         btnXoa.setEnabled(false);
         btnThoat.setEnabled(false);
         cbbSubject.setEnabled(false);
+        btnLuu.setEnabled(true);
+        btnHuy.setEnabled(true);
     }
 
     /**
@@ -165,11 +169,17 @@ public class formMarkManage extends javax.swing.JFrame {
         btnThoat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tMark = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        txtID = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 204));
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("Subject");
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setText("Mark1");
 
         txtMark1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -178,6 +188,7 @@ public class formMarkManage extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel3.setText("Mark2");
 
         txtMark2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -186,6 +197,7 @@ public class formMarkManage extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel4.setText("Mark3");
 
         txtMark3.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -194,28 +206,32 @@ public class formMarkManage extends javax.swing.JFrame {
             }
         });
 
-        btnThem.setText("Thêm");
+        btnThem.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnThem.setText("Add");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
             }
         });
 
-        btnSua.setText("Sửa");
+        btnSua.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnSua.setText("Edit");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
             }
         });
 
-        btnXoa.setText("Xóa");
+        btnXoa.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnXoa.setText("Delete");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
             }
         });
 
-        btnLuu.setText("Lưu");
+        btnLuu.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnLuu.setText("Save");
         btnLuu.setToolTipText("");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,14 +239,16 @@ public class formMarkManage extends javax.swing.JFrame {
             }
         });
 
-        btnHuy.setText("Hủy");
+        btnHuy.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnHuy.setText("Cancel");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHuyActionPerformed(evt);
             }
         });
 
-        btnThoat.setText("Thoát");
+        btnThoat.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnThoat.setText("Quit");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThoatActionPerformed(evt);
@@ -255,70 +273,116 @@ public class formMarkManage extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tMark);
 
+        txtID.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel5.setText("Manage mark");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(46, 46, 46)
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(cbbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(66, 66, 66)
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtMark1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(48, 48, 48)
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtMark2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(47, 47, 47)
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtMark3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(191, 191, 191)
-                            .addComponent(btnThem)
-                            .addGap(56, 56, 56)
-                            .addComponent(btnSua)
-                            .addGap(54, 54, 54)
-                            .addComponent(btnXoa)
-                            .addGap(63, 63, 63)
-                            .addComponent(btnLuu)
-                            .addGap(58, 58, 58)
-                            .addComponent(btnHuy)
-                            .addGap(50, 50, 50)
-                            .addComponent(btnThoat))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(84, 84, 84)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(83, 83, 83)
+                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(79, 79, 79)
+                                .addComponent(btnXoa))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(158, 158, 158)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(193, 193, 193)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(89, 89, 89)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(95, 95, 95)
+                                .addComponent(btnHuy)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMark3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtMark2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtMark1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(cbbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMark1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMark2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMark3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(45, 45, 45))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cbbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMark1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtMark3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtMark2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem)
                     .addComponent(btnSua)
+                    .addComponent(btnThem)
                     .addComponent(btnXoa)
                     .addComponent(btnLuu)
-                    .addComponent(btnHuy)
-                    .addComponent(btnThoat))
-                .addGap(18, 18, 18)
+                    .addComponent(btnThoat)
+                    .addComponent(btnHuy))
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
 
         pack();
@@ -387,9 +451,9 @@ public class formMarkManage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        check_input();
+        check_input(); 
         try {
-
+            
             int subject_id = cbbSubject.getSelectedIndex() + 1;
             float mark1 = Float.parseFloat(txtMark1.getText());
             float mark2 = Float.parseFloat(txtMark2.getText());
@@ -402,8 +466,9 @@ public class formMarkManage extends javax.swing.JFrame {
             Connect.close(ps, rs);
             showData();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex);
+            System.out.println("Error add mark");
         }
+        
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void NapItemDuocChon() {
@@ -496,8 +561,11 @@ public class formMarkManage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tMark;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtMark1;
     private javax.swing.JTextField txtMark2;
     private javax.swing.JTextField txtMark3;
